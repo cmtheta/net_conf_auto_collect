@@ -1,0 +1,2 @@
+# net_conf_auto_collect
+ネットワーク機器設定自動取得
