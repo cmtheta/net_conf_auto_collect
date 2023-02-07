@@ -1,0 +1,35 @@
+# {{ inventory_hostname }}
+
+| 項目 | 値 |
+|------|----|
+| Hostname | {{ ansible_net_hostname }} |
+
+## ページ内リンク
+ - [Interface](#インタフェース)
+ - [Neighbors](#隣接関係)
+ - [VLAN](#vlan)
+ - [Device](#機器情報)
+ - [Hardware](#ハードウェア情報)
+
+
+<!--- インターフェイス情報 --->
+{% include "blocks/interface.j2" %}
+
+<!--- 隣接関係 --->
+{% include "blocks/neighbors.j2" %}
+
+{% include "blocks/vlans.j2" %}
+
+{% include "blocks/bgp.j2"%}
+{% include "blocks/acl.j2" %}
+{% include "blocks/lacp.j2" %}
+{% include "blocks/lldp.j2" %}
+{% include "blocks/ntp.j2" %}
+{% include "blocks/ospf.j2" %}
+{% include "blocks/snmp.j2" %}
+
+<!--- バージョン情報等 --->
+{% include "blocks/device_info.j2" %}
+
+<!--- ハードウェア情報 --->
+{% include "blocks/hardware_info.j2" %}

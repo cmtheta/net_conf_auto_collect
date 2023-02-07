@@ -1,0 +1,19 @@
+<!--- 
+取得した情報の種類等 
+開発時にデバッグのために作成した
+--->
+
+## ネットワークリソース
+{% for resource in ansible_net_gather_network_resources %}
+  - {{ resource }}
+{% endfor %}
+
+## リソース
+{% for resource, value in ansible_network_resources.items() %}
+  - {{ resource }},{{value}}
+{% endfor %}
+
+## 記載情報
+{% for subset in ansible_net_gather_subset %}
+  - {{ subset }}
+{% endfor %}

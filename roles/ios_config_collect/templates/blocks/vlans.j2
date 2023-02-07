@@ -1,0 +1,6 @@
+## VLAN
+| name | vlan id | state | shutdown | mtu |
+|------|---------|-------|----------|-----|
+{% for info in ansible_network_resources["vlans"] | default([]) %}
+| {{ info.name }} | {{ info.vlan_id }} | {{ info.state }} | {{ info.shutdown }} | {{ info.mtu }} |   
+{% endfor %}

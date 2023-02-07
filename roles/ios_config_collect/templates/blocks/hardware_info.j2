@@ -1,0 +1,13 @@
+## ハードウェア情報
+### メモリ
+| 項目 | 値 |
+|------|----|
+| memfree | {{ ansible_net_memfree_mb }} |  
+| memtotal | {{ ansible_net_memtotal_mb }} |  
+
+### ファイルシステム
+| name | spacetotal_kb | spacefree_kb |
+|------|---------------|--------------|
+{% for filesystem, info in ansible_net_filesystems_info.items() %}
+  | filesystem | info.spacetotal_kb | info.spacefree_kb |
+{% endfor %}

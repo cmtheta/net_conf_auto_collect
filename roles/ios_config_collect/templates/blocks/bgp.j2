@@ -1,0 +1,15 @@
+## bgp  (準備中)
+
+{{ ansible_network_resources["bgp_address_family"] | default("None") }}  
+{{ ansible_network_resources["bgp_global"] | default("None") }}  
+
+### AS Number : {{ ansible_network_resources["bgp_address_family"].as_number | default("None") }}
+{% for addr_family in ansible_network_resources["bgp_address_family"].address_family | default([]) %}
+#### {{ addr_family.afi }}  
+{% for neighbor in addr_family.neighbor %}
+##### Address:{{ neighbor.address }} Activate {{ neighbor.activate }}
+
+{% endfor %}
+{% endfor %}
+
+

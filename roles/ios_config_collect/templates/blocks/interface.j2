@@ -1,0 +1,28 @@
+## インタフェース
+{% for interface, value in ansible_net_interfaces.items() %}
+### {{ interface }}
+##### IPv4
+| address | subnet |
+|------|----|
+{% for info in value.ipv4 %}
+| {{ info.address }} | {{ info.subnet }} |
+
+##### IPv6
+準備中
+
+##### その他
+| macaddress | mtu  | bandwidth | mediatype |
+|------------|------|-----------|-----------|
+| {{ value.macaddress }} | {{ value.mtu }} | {{ value.bandwidth }} | {{ value.mediatype }} |
+
+| duplex | lineprotocol | operstatus | type |
+|--------|--------------|------------|------|
+| {{ value.duplex }} | {{ value.lineprotocol }} | {{ value.operstatus }} | {{ value.type }} |
+
+{% endfor %}
+{% endfor %}
+
+{{ ansible_network_resources["interfaces"] | default("None")}}
+{{ ansible_network_resources["l2_interfaces"] | default("None")}}
+{{ ansible_network_resources["l3_interfaces"] | default("None")}}
+

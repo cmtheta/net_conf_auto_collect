@@ -1,0 +1,29 @@
+---
+- name: fetch configulation file from network device
+  cisco.ios.ios_config:
+    backup: yes
+    backup_options:
+      dir_path: ./{{ config_store_repo }}/{{ inventory_hostname }}
+      filename: backup_config
+
+- name: Gather all legacy facts
+  cisco.ios.ios_facts:
+    gather_subset: all
+    available_network_resources: true
+    gather_network_resources: "{{ resources }}"
+  register: result
+
+- name: create report
+  template:
+    src: ./templates/report.j2
+    dest: ./{{ config_store_repo }}/{{ inventory_hostname }}/{{ inventory_hostname }}.md
+
+- name: git add & commit & push
+  git_acp:
+    user: olab
+    path: ./{{ config_store_repo }}/
+    branch: main
+    comment: update {{ lookup('pipe','date +%Y年%m月%d日%H時%M分') }}
+    add: "*"
+    mode: ssh
+    url: "git@10.0.0.11:olab_control/{{ config_store_repo }}.git"

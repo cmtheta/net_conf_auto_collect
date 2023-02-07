@@ -1,0 +1,8 @@
+## 隣接関係
+|装置名|ローカルインタフェース|隣接装置名|隣接インタフェース|
+|------|--------------------|--------|-----------------|
+{% for interface, neighbors in ansible_net_neighbors.items() %}
+{% for neighbor in neighbors %}
+| {{ inventory_hostname }} | {{ interface }} | {{ neighbor.host }} | {{ inventory_hostname}} |
+{% endfor %}
+{% endfor %}
